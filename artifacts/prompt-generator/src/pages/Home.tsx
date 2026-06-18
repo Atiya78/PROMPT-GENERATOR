@@ -159,6 +159,19 @@ export default function Home() {
                               <SelectItem value="Marketing">Marketing</SelectItem>
                               <SelectItem value="Research">Research</SelectItem>
                               <SelectItem value="Image generation">Image generation</SelectItem>
+                              <SelectItem value="Data analysis">Data analysis</SelectItem>
+                              <SelectItem value="Business strategy">Business strategy</SelectItem>
+                              <SelectItem value="Education & tutoring">Education & tutoring</SelectItem>
+                              <SelectItem value="Customer support">Customer support</SelectItem>
+                              <SelectItem value="Translation">Translation</SelectItem>
+                              <SelectItem value="Summarization">Summarization</SelectItem>
+                              <SelectItem value="Brainstorming">Brainstorming</SelectItem>
+                              <SelectItem value="Email & outreach">Email & outreach</SelectItem>
+                              <SelectItem value="Social media">Social media</SelectItem>
+                              <SelectItem value="SEO content">SEO content</SelectItem>
+                              <SelectItem value="Legal & compliance">Legal & compliance</SelectItem>
+                              <SelectItem value="Product management">Product management</SelectItem>
+                              <SelectItem value="Video & audio scripts">Video & audio scripts</SelectItem>
                               <SelectItem value="Other">Other</SelectItem>
                             </SelectContent>
                           </Select>
@@ -182,9 +195,19 @@ export default function Home() {
                             <SelectContent>
                               <SelectItem value="Professional">Professional</SelectItem>
                               <SelectItem value="Casual">Casual</SelectItem>
+                              <SelectItem value="Friendly">Friendly</SelectItem>
+                              <SelectItem value="Formal">Formal</SelectItem>
                               <SelectItem value="Persuasive">Persuasive</SelectItem>
                               <SelectItem value="Technical">Technical</SelectItem>
-                              <SelectItem value="Friendly">Friendly</SelectItem>
+                              <SelectItem value="Authoritative">Authoritative</SelectItem>
+                              <SelectItem value="Empathetic">Empathetic</SelectItem>
+                              <SelectItem value="Humorous">Humorous</SelectItem>
+                              <SelectItem value="Inspirational">Inspirational</SelectItem>
+                              <SelectItem value="Conversational">Conversational</SelectItem>
+                              <SelectItem value="Concise">Concise</SelectItem>
+                              <SelectItem value="Academic">Academic</SelectItem>
+                              <SelectItem value="Bold">Bold</SelectItem>
+                              <SelectItem value="Neutral">Neutral</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -207,9 +230,18 @@ export default function Home() {
                             <SelectContent>
                               <SelectItem value="Paragraph">Paragraph</SelectItem>
                               <SelectItem value="Bullet points">Bullet points</SelectItem>
+                              <SelectItem value="Numbered list">Numbered list</SelectItem>
                               <SelectItem value="Step-by-step">Step-by-step</SelectItem>
-                              <SelectItem value="JSON">JSON</SelectItem>
+                              <SelectItem value="Markdown">Markdown</SelectItem>
+                              <SelectItem value="Outline">Outline</SelectItem>
                               <SelectItem value="Table">Table</SelectItem>
+                              <SelectItem value="JSON">JSON</SelectItem>
+                              <SelectItem value="XML">XML</SelectItem>
+                              <SelectItem value="CSV">CSV</SelectItem>
+                              <SelectItem value="Code block">Code block</SelectItem>
+                              <SelectItem value="Q&A">Q&A</SelectItem>
+                              <SelectItem value="Checklist">Checklist</SelectItem>
+                              <SelectItem value="Essay">Essay</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -231,10 +263,21 @@ export default function Home() {
                             </FormControl>
                             <SelectContent>
                               <SelectItem value="anthropic/claude-sonnet-4.6">Claude Sonnet 4.6</SelectItem>
+                              <SelectItem value="anthropic/claude-opus-4.1">Claude Opus 4.1</SelectItem>
+                              <SelectItem value="anthropic/claude-3.5-haiku">Claude 3.5 Haiku</SelectItem>
+                              <SelectItem value="openai/gpt-4.1">GPT-4.1</SelectItem>
+                              <SelectItem value="openai/gpt-4.1-mini">GPT-4.1 mini</SelectItem>
                               <SelectItem value="openai/gpt-4o">GPT-4o</SelectItem>
                               <SelectItem value="openai/gpt-4o-mini">GPT-4o mini</SelectItem>
-                              <SelectItem value="google/gemini-2.5-flash">Gemini 2.5 Flash</SelectItem>
+                              <SelectItem value="openai/o3">OpenAI o3</SelectItem>
+                              <SelectItem value="openai/o4-mini">OpenAI o4-mini</SelectItem>
                               <SelectItem value="google/gemini-2.5-pro">Gemini 2.5 Pro</SelectItem>
+                              <SelectItem value="google/gemini-2.5-flash">Gemini 2.5 Flash</SelectItem>
+                              <SelectItem value="meta-llama/llama-3.3-70b-instruct">Llama 3.3 70B</SelectItem>
+                              <SelectItem value="meta-llama/llama-4-maverick">Llama 4 Maverick</SelectItem>
+                              <SelectItem value="deepseek/deepseek-chat">DeepSeek V3</SelectItem>
+                              <SelectItem value="mistralai/mistral-large">Mistral Large</SelectItem>
+                              <SelectItem value="x-ai/grok-4.3">Grok 4.3</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
