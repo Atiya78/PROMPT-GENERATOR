@@ -107,92 +107,13 @@ export default function Home() {
                 )}
               />
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <FormField
-                  control={form.control}
-                  name="useCase"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium">Use Case</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger data-testid="select-use-case" className="bg-card">
-                            <SelectValue placeholder="Select one" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="Writing">Writing</SelectItem>
-                          <SelectItem value="Coding">Coding</SelectItem>
-                          <SelectItem value="Marketing">Marketing</SelectItem>
-                          <SelectItem value="Research">Research</SelectItem>
-                          <SelectItem value="Image generation">Image generation</SelectItem>
-                          <SelectItem value="Other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="tone"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium">Tone</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger data-testid="select-tone" className="bg-card">
-                            <SelectValue placeholder="Select one" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="Professional">Professional</SelectItem>
-                          <SelectItem value="Casual">Casual</SelectItem>
-                          <SelectItem value="Persuasive">Persuasive</SelectItem>
-                          <SelectItem value="Technical">Technical</SelectItem>
-                          <SelectItem value="Friendly">Friendly</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-                <FormField
-                  control={form.control}
-                  name="format"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel className="text-sm font-medium">Output Format</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
-                        <FormControl>
-                          <SelectTrigger data-testid="select-format" className="bg-card">
-                            <SelectValue placeholder="Select one" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="Paragraph">Paragraph</SelectItem>
-                          <SelectItem value="Bullet points">Bullet points</SelectItem>
-                          <SelectItem value="Step-by-step">Step-by-step</SelectItem>
-                          <SelectItem value="JSON">JSON</SelectItem>
-                          <SelectItem value="Table">Table</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-
-              </div>
-
               <div className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3 shadow-sm">
                 <div className="flex flex-col">
                   <Label htmlFor="advanced-toggle" className="text-sm font-medium cursor-pointer">
                     Advanced options
                   </Label>
                   <span className="text-xs text-muted-foreground">
-                    Choose a specific target model
+                    Fine-tune use case, tone, format, and target model
                   </span>
                 </div>
                 <Switch
@@ -201,40 +122,123 @@ export default function Home() {
                   onCheckedChange={(checked) => {
                     setShowAdvanced(checked);
                     if (!checked) {
+                      form.setValue("useCase", "");
+                      form.setValue("tone", "");
+                      form.setValue("format", "");
                       form.setValue("model", "");
                     }
                   }}
                   aria-expanded={showAdvanced}
-                  aria-controls="advanced-model-options"
+                  aria-controls="advanced-options"
                   data-testid="switch-advanced"
                 />
               </div>
 
               {showAdvanced && (
-                <FormField
-                  control={form.control}
-                  name="model"
-                  render={({ field }) => (
-                    <FormItem id="advanced-model-options">
-                      <FormLabel className="text-sm font-medium">Target Model</FormLabel>
-                      <Select onValueChange={field.onChange} value={field.value}>
-                        <FormControl>
-                          <SelectTrigger data-testid="select-model" className="bg-card">
-                            <SelectValue placeholder="Default: Claude Sonnet 4.6" />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          <SelectItem value="anthropic/claude-sonnet-4.6">Claude Sonnet 4.6</SelectItem>
-                          <SelectItem value="openai/gpt-4o">GPT-4o</SelectItem>
-                          <SelectItem value="openai/gpt-4o-mini">GPT-4o mini</SelectItem>
-                          <SelectItem value="google/gemini-2.5-flash">Gemini 2.5 Flash</SelectItem>
-                          <SelectItem value="google/gemini-2.5-pro">Gemini 2.5 Pro</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+                <div id="advanced-options" className="space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <FormField
+                      control={form.control}
+                      name="useCase"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-medium">Use Case</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger data-testid="select-use-case" className="bg-card">
+                                <SelectValue placeholder="Select one" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="Writing">Writing</SelectItem>
+                              <SelectItem value="Coding">Coding</SelectItem>
+                              <SelectItem value="Marketing">Marketing</SelectItem>
+                              <SelectItem value="Research">Research</SelectItem>
+                              <SelectItem value="Image generation">Image generation</SelectItem>
+                              <SelectItem value="Other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="tone"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-medium">Tone</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger data-testid="select-tone" className="bg-card">
+                                <SelectValue placeholder="Select one" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="Professional">Professional</SelectItem>
+                              <SelectItem value="Casual">Casual</SelectItem>
+                              <SelectItem value="Persuasive">Persuasive</SelectItem>
+                              <SelectItem value="Technical">Technical</SelectItem>
+                              <SelectItem value="Friendly">Friendly</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="format"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-medium">Output Format</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger data-testid="select-format" className="bg-card">
+                                <SelectValue placeholder="Select one" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="Paragraph">Paragraph</SelectItem>
+                              <SelectItem value="Bullet points">Bullet points</SelectItem>
+                              <SelectItem value="Step-by-step">Step-by-step</SelectItem>
+                              <SelectItem value="JSON">JSON</SelectItem>
+                              <SelectItem value="Table">Table</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                    <FormField
+                      control={form.control}
+                      name="model"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="text-sm font-medium">Target Model</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value}>
+                            <FormControl>
+                              <SelectTrigger data-testid="select-model" className="bg-card">
+                                <SelectValue placeholder="Default: Claude Sonnet 4.6" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="anthropic/claude-sonnet-4.6">Claude Sonnet 4.6</SelectItem>
+                              <SelectItem value="openai/gpt-4o">GPT-4o</SelectItem>
+                              <SelectItem value="openai/gpt-4o-mini">GPT-4o mini</SelectItem>
+                              <SelectItem value="google/gemini-2.5-flash">Gemini 2.5 Flash</SelectItem>
+                              <SelectItem value="google/gemini-2.5-pro">Gemini 2.5 Pro</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                </div>
               )}
 
               <Button 
