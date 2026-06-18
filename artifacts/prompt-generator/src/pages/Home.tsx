@@ -24,6 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -339,9 +340,29 @@ export default function Home() {
             {/* Content Area */}
             <div className="flex-1 p-6 overflow-y-auto relative">
               {isPending ? (
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground bg-card/50 backdrop-blur-sm z-10" data-testid="status-loading">
-                  <Loader2 className="w-8 h-8 animate-spin mb-4 text-primary" />
-                  <p className="text-sm font-medium animate-pulse">Structuring your prompt...</p>
+                <div className="space-y-7" data-testid="status-loading" aria-live="polite" aria-busy="true">
+                  <div className="flex items-center gap-2 text-sm font-medium text-muted-foreground">
+                    <Loader2 className="h-4 w-4 animate-spin text-primary" />
+                    <span>Structuring your prompt…</span>
+                  </div>
+                  <div className="space-y-3">
+                    <Skeleton className="h-3.5 w-1/3" />
+                    <Skeleton className="h-3 w-full" />
+                    <Skeleton className="h-3 w-[92%]" />
+                    <Skeleton className="h-3 w-4/5" />
+                  </div>
+                  <div className="space-y-3">
+                    <Skeleton className="h-3.5 w-1/4" />
+                    <Skeleton className="h-3 w-full" />
+                    <Skeleton className="h-3 w-[88%]" />
+                    <Skeleton className="h-3 w-full" />
+                    <Skeleton className="h-3 w-3/5" />
+                  </div>
+                  <div className="space-y-3">
+                    <Skeleton className="h-3.5 w-2/5" />
+                    <Skeleton className="h-3 w-[90%]" />
+                    <Skeleton className="h-3 w-3/4" />
+                  </div>
                 </div>
               ) : isError ? (
                 <Alert variant="destructive" className="mt-4" data-testid="status-error">
