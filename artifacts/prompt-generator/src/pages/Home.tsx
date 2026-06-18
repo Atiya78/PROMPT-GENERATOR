@@ -41,6 +41,13 @@ const formSchema = z.object({
 
 type FormValues = z.infer<typeof formSchema>;
 
+function stripMarkdown(text: string): string {
+  return text
+    .replace(/^[ \t]*#{1,6}[ \t]+/gm, "")
+    .replace(/\*\*(.+?)\*\*/gs, "$1")
+    .replace(/\*\*/g, "");
+}
+
 export default function Home() {
   const [isCopied, setIsCopied] = useState(false);
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -58,13 +65,15 @@ export default function Home() {
 
   const { mutate: generatePrompt, data, isPending, isError, error } = useGeneratePrompt();
 
+  const cleanPrompt = data?.prompt ? stripMarkdown(data.prompt) : "";
+
   function onSubmit(values: FormValues) {
     generatePrompt({ data: values });
   }
 
   async function handleCopy() {
-    if (data?.prompt) {
-      await navigator.clipboard.writeText(data.prompt);
+    if (cleanPrompt) {
+      await navigator.clipboard.writeText(cleanPrompt);
       setIsCopied(true);
       setTimeout(() => setIsCopied(false), 2000);
     }
@@ -319,7 +328,7 @@ export default function Home() {
                 variant="ghost"
                 size="sm"
                 onClick={handleCopy}
-                disabled={!data?.prompt || isPending}
+                disabled={!cleanPrompt || isPending}
                 className="text-muted-foreground hover:text-foreground"
                 data-testid="button-copy"
               >
@@ -372,12 +381,12 @@ export default function Home() {
                     {(error?.data as { error?: string } | null)?.error || error?.message || "An unexpected error occurred while generating the prompt. Please try again."}
                   </AlertDescription>
                 </Alert>
-              ) : data?.prompt ? (
+              ) : cleanPrompt ? (
                 <div 
                   className="font-mono text-sm leading-relaxed whitespace-pre-wrap break-words text-card-foreground selection:bg-primary/20"
                   data-testid="text-prompt-result"
                 >
-                  {data.prompt}
+                  {cleanPrompt}
                 </div>
               ) : (
                 <div className="h-full flex flex-col items-center justify-center text-center max-w-sm mx-auto opacity-50" data-testid="status-empty">

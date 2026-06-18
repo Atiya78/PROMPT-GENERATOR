@@ -3,7 +3,9 @@ import { GeneratePromptBody } from "@workspace/api-zod";
 
 const router: IRouter = Router();
 
-const META_PROMPT = `You are an expert prompt engineer. Given a user's rough idea and preferences, write a single, high-quality, ready-to-use prompt for an AI model. The prompt should be clear, specific, and well-structured: define the role, the task, any relevant context, constraints, the desired output format, and tone. Use sections or numbered steps where it improves clarity. Do not answer the user's idea yourself — only produce the optimized prompt. Return ONLY the prompt text, with no preamble or explanation.`;
+const META_PROMPT = `You are an expert prompt engineer. Given a user's rough idea and preferences, write a single, high-quality, ready-to-use prompt for an AI model. The prompt should be clear, specific, and well-structured: define the role, the task, any relevant context, constraints, the desired output format, and tone. Use sections or numbered steps where it improves clarity. Do not answer the user's idea yourself — only produce the optimized prompt. Return ONLY the prompt text, with no preamble or explanation.
+
+Write the prompt as clean plain text. Do NOT use Markdown formatting in the prompt itself — no "**" for bold, no "#" or "##" for headings, and no backticks for code fences. For structure, use plain UPPERCASE or Title Case labels followed by a colon, and use numbered lists ("1.", "2.") or hyphen bullets ("- ") for items.`;
 
 router.post("/generate", async (req, res) => {
   const parseResult = GeneratePromptBody.safeParse(req.body);
