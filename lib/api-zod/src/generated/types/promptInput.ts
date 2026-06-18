@@ -5,9 +5,6 @@
  * API specification
  * OpenAPI spec version: 0.1.0
  */
-export interface HealthStatus {
-  status: string;
-}
 
 export interface PromptInput {
   /**
@@ -24,13 +21,3 @@ export interface PromptInput {
   /** OpenRouter model identifier */
   model?: string;
 }
-
-export interface PromptResult {
-  /** The generated, polished AI prompt */
-  prompt: string;
-}
-
-export interface ApiError {
-  error: string;
-}
-

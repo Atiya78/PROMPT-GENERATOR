@@ -6,7 +6,7 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export * from './apiError';
-export * from './healthStatus';
-export * from './promptInput';
-export * from './promptResult';
+export interface PromptResult {
+  /** The generated, polished AI prompt */
+  prompt: string;
+}
