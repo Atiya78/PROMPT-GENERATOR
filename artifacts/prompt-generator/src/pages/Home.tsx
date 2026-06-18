@@ -194,8 +194,9 @@ export default function Home() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="openai/gpt-4o-mini">GPT-4o mini</SelectItem>
+                          <SelectItem value="anthropic/claude-sonnet-4.6">Claude Sonnet 4.6</SelectItem>
                           <SelectItem value="openai/gpt-4o">GPT-4o</SelectItem>
+                          <SelectItem value="openai/gpt-4o-mini">GPT-4o mini</SelectItem>
                           <SelectItem value="google/gemini-2.5-flash">Gemini 2.5 Flash</SelectItem>
                           <SelectItem value="google/gemini-2.5-pro">Gemini 2.5 Pro</SelectItem>
                         </SelectContent>

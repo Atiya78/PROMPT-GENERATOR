@@ -26,7 +26,7 @@ router.post("/generate", async (req, res) => {
     return;
   }
 
-  const selectedModel = model || "openai/gpt-4o-mini";
+  const selectedModel = model || "anthropic/claude-sonnet-4.6";
 
   const userMessage = [
     `Idea/Task: ${idea}`,
