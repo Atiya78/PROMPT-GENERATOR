@@ -23,8 +23,11 @@ A single-page web app where users type a rough idea, pick options, and get back 
 
 - `lib/api-spec/openapi.yaml` — API contract (source of truth)
 - `artifacts/api-server/src/routes/generate.ts` — POST /api/generate handler (proxies OpenRouter)
-- `artifacts/prompt-generator/src/pages/Home.tsx` — single-page UI (hero + generator + "How it works" + footer)
-- `artifacts/prompt-generator/src/components/Navbar.tsx` — sticky header / navbar
+- `artifacts/prompt-generator/src/App.tsx` — wouter routes (`/` Generator, `/how-it-works`)
+- `artifacts/prompt-generator/src/pages/Home.tsx` — Generator page (hero + form + output)
+- `artifacts/prompt-generator/src/pages/HowItWorks.tsx` — "How it works" page (3-step explainer)
+- `artifacts/prompt-generator/src/components/Navbar.tsx` — sticky header / navbar (wouter `Link` nav, active-state aware)
+- `artifacts/prompt-generator/src/components/Footer.tsx` — shared footer
 - `artifacts/prompt-generator/src/index.css` — theme / CSS variables
 
 ## Architecture decisions

@@ -28,6 +28,7 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const formSchema = z.object({
   idea: z.string().min(1, "Please provide an idea or task to get started."),
@@ -69,9 +70,9 @@ export default function Home() {
   }
 
   return (
-    <div id="top" className="min-h-screen bg-background text-foreground">
+    <div className="flex min-h-screen flex-col bg-background text-foreground">
       <Navbar />
-      <main id="generator" className="scroll-mt-20 flex items-center justify-center p-4 md:p-8 lg:p-12">
+      <main className="flex flex-1 items-center justify-center p-4 md:p-8 lg:p-12">
         <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
         
         {/* Left Column: Input Form */}
@@ -337,66 +338,7 @@ export default function Home() {
         </div>
       </main>
 
-      {/* How it works */}
-      <section id="how" className="scroll-mt-20 border-t border-border bg-card">
-        <div className="mx-auto max-w-6xl px-4 py-16 md:px-8 md:py-20">
-          <div className="mx-auto mb-12 max-w-2xl text-center">
-            <h2 className="mb-3 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-              How it works
-            </h2>
-            <p className="text-lg text-muted-foreground">
-              From rough idea to a polished, copy-ready prompt in three steps.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {[
-              {
-                step: "1",
-                title: "Describe your idea",
-                body: "Type a rough idea or task. No need to be precise — that's our job.",
-              },
-              {
-                step: "2",
-                title: "Tune the details",
-                body: "Optionally set use case, tone, format, and target model under Advanced options.",
-              },
-              {
-                step: "3",
-                title: "Generate & copy",
-                body: "Get a structured, model-ready prompt and copy it with a single click.",
-              },
-            ].map((item) => (
-              <div
-                key={item.step}
-                className="rounded-xl border border-border bg-background p-6 shadow-sm"
-                data-testid={`card-step-${item.step}`}
-              >
-                <span className="mb-4 flex h-10 w-10 items-center justify-center rounded-full bg-primary text-base font-bold text-primary-foreground font-display">
-                  {item.step}
-                </span>
-                <h3 className="mb-2 text-lg font-semibold text-foreground">{item.title}</h3>
-                <p className="text-sm text-muted-foreground">{item.body}</p>
-              </div>
-            ))}
-          </div>
-          <div className="mt-12 flex justify-center">
-            <Button asChild size="lg" className="rounded-full px-8 font-semibold shadow-sm">
-              <a href="#generator" data-testid="button-how-cta">Start generating</a>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-border bg-card">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-2 px-4 py-6 text-sm text-muted-foreground md:flex-row md:px-8">
-          <span>
-            <span className="font-display font-bold text-foreground">prompt</span>
-            <span className="font-display font-bold text-primary">forge</span>
-          </span>
-          <span>Polished AI prompts, generated in seconds.</span>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
