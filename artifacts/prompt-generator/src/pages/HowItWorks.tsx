@@ -36,7 +36,7 @@ export default function HowItWorks() {
               From rough idea to polished prompt.
             </h1>
             <p className="text-lg text-muted-foreground">
-              promptforge turns a quick note into a structured, copy-ready AI prompt in three simple steps.
+              Turn a quick note into a structured, copy-ready AI prompt in three simple steps.
             </p>
           </div>
         </section>
