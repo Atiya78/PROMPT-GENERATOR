@@ -25,6 +25,8 @@ import {
 } from "@/components/ui/select";
 import { Card } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 
 const formSchema = z.object({
   idea: z.string().min(1, "Please provide an idea or task to get started."),
@@ -38,6 +40,7 @@ type FormValues = z.infer<typeof formSchema>;
 
 export default function Home() {
   const [isCopied, setIsCopied] = useState(false);
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -181,16 +184,43 @@ export default function Home() {
                   )}
                 />
 
+              </div>
+
+              <div className="flex items-center justify-between rounded-lg border border-border bg-card px-4 py-3 shadow-sm">
+                <div className="flex flex-col">
+                  <Label htmlFor="advanced-toggle" className="text-sm font-medium cursor-pointer">
+                    Advanced options
+                  </Label>
+                  <span className="text-xs text-muted-foreground">
+                    Choose a specific target model
+                  </span>
+                </div>
+                <Switch
+                  id="advanced-toggle"
+                  checked={showAdvanced}
+                  onCheckedChange={(checked) => {
+                    setShowAdvanced(checked);
+                    if (!checked) {
+                      form.setValue("model", "");
+                    }
+                  }}
+                  aria-expanded={showAdvanced}
+                  aria-controls="advanced-model-options"
+                  data-testid="switch-advanced"
+                />
+              </div>
+
+              {showAdvanced && (
                 <FormField
                   control={form.control}
                   name="model"
                   render={({ field }) => (
-                    <FormItem>
+                    <FormItem id="advanced-model-options">
                       <FormLabel className="text-sm font-medium">Target Model</FormLabel>
-                      <Select onValueChange={field.onChange} defaultValue={field.value}>
+                      <Select onValueChange={field.onChange} value={field.value}>
                         <FormControl>
                           <SelectTrigger data-testid="select-model" className="bg-card">
-                            <SelectValue placeholder="Select one" />
+                            <SelectValue placeholder="Default: Claude Sonnet 4.6" />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
@@ -205,7 +235,7 @@ export default function Home() {
                     </FormItem>
                   )}
                 />
-              </div>
+              )}
 
               <Button 
                 type="submit" 
