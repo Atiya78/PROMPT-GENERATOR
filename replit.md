@@ -23,7 +23,8 @@ A single-page web app where users type a rough idea, pick options, and get back 
 
 - `lib/api-spec/openapi.yaml` — API contract (source of truth)
 - `artifacts/api-server/src/routes/generate.ts` — POST /api/generate handler (proxies OpenRouter)
-- `artifacts/prompt-generator/src/pages/Home.tsx` — single-page UI
+- `artifacts/prompt-generator/src/pages/Home.tsx` — single-page UI (hero + generator + "How it works" + footer)
+- `artifacts/prompt-generator/src/components/Navbar.tsx` — sticky header / navbar
 - `artifacts/prompt-generator/src/index.css` — theme / CSS variables
 
 ## Architecture decisions
@@ -39,6 +40,11 @@ A single-page web app where users type a rough idea, pick options, and get back 
 - Selects use case, tone, output format, and target model (Claude, GPT-4o, Llama, Gemini)
 - Clicks "Generate Prompt" — the backend calls OpenRouter with a meta-prompt system message
 - The polished, copy-ready prompt appears in the output pane with a one-click Copy button
+
+## Design language
+
+- Visual style is modeled on remove.bg: blue accent `#0F70E6` (`--primary`), grey text `#454545`, white/light background, pill-shaped (`rounded-full`) primary CTAs
+- Fonts: Poppins for headings (`--app-font-display`, applied to `h1`–`h6`), Open Sans for body, Space Mono for the generated prompt output
 
 ## User preferences
 
