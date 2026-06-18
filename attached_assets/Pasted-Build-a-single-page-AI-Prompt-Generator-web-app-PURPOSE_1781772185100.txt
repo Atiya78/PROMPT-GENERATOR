@@ -1,0 +1,60 @@
+Build a single-page "AI Prompt Generator" web app.
+
+PURPOSE
+A user types a rough idea or task, picks a few options, clicks Generate, and gets back a polished, well-structured prompt they can copy. The app uses the OpenRouter API to do the prompt engineering.
+
+TECH STACK
+- Node.js + Express backend (serves the frontend AND acts as an API proxy)
+- Vanilla HTML/CSS/JS frontend (no framework needed, keep it lightweight and fast)
+- The OpenRouter API key MUST be read from a Replit Secret named OPENROUTER_API_KEY. Never expose it in frontend code.
+
+BACKEND
+- Serve static frontend files from a /public folder.
+- Create one POST endpoint: /api/generate
+  - Accepts JSON: { idea, useCase, tone, format, model }
+  - Calls OpenRouter chat completions:
+      URL: https://openrouter.ai/api/v1/chat/completions
+      Headers:
+        Authorization: Bearer ${process.env.OPENROUTER_API_KEY}
+        Content-Type: application/json
+        HTTP-Referer: <the app URL>
+        X-Title: Prompt Generator
+      Body: {
+        model: <model from request, default "anthropic/claude-3.5-sonnet">,
+        messages: [
+          { role: "system", content: <META_PROMPT below> },
+          { role: "user", content: <the assembled user request> }
+        ]
+      }
+  - Return the generated prompt text as JSON to the frontend.
+  - Wrap in try/catch and return clean error messages (never leak the key).
+
+META_PROMPT (system prompt for the model):
+"You are an expert prompt engineer. Given a user's rough idea and preferences, write a single, high-quality, ready-to-use prompt for an AI model. The prompt should be clear, specific, and well-structured: define the role, the task, any relevant context, constraints, the desired output format, and tone. Use sections or numbered steps where it improves clarity. Do not answer the user's idea yourself — only produce the optimized prompt. Return ONLY the prompt text, with no preamble, explanation, or markdown code fences."
+
+The user message sent to the model should combine the fields, e.g.:
+"Idea/Task: {idea}
+Intended use case: {useCase}
+Desired tone: {tone}
+Desired output format: {format}
+Write the optimized prompt accordingly."
+
+FRONTEND (single page, clean modern UI)
+- A heading and short subtitle.
+- A large textarea for "Your idea or task".
+- Dropdowns/inputs for:
+    - Use case (e.g. Writing, Coding, Marketing, Research, Image generation, Other)
+    - Tone (Professional, Casual, Persuasive, Technical, Friendly)
+    - Output format (Paragraph, Bullet points, Step-by-step, JSON, Table)
+    - Model selector with a few OpenRouter options (Claude 3.5 Sonnet, GPT-4o, Llama 3.1, etc.)
+- A "Generate Prompt" button.
+- A result area that displays the generated prompt in a readable box.
+- A "Copy" button on the result that copies to clipboard and shows a brief "Copied!" confirmation.
+- A loading state (spinner or "Generating...") while the request runs.
+- Handle and display errors gracefully.
+- Responsive design that works on mobile. Use a clean, minimal aesthetic with good spacing and a subtle accent color.
+
+DELIVERABLES
+- A working app I can run immediately with the Run button.
+- package.json with start script.
+- Clear comment at the top of server.js reminding me to add OPENROUTER_API_KEY in Replit Secrets.

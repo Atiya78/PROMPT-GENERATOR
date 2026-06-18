@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: prompts
+    description: Prompt generation operations
 paths:
   /healthz:
     get:
@@ -24,6 +26,37 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /generate:
+    post:
+      operationId: generatePrompt
+      tags: [prompts]
+      summary: Generate an AI prompt
+      description: Takes a rough idea and preferences, returns a polished AI prompt
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PromptInput"
+      responses:
+        "200":
+          description: Generated prompt
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PromptResult"
+        "400":
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
+        "500":
+          description: Server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ApiError"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +66,39 @@ components:
           type: string
       required:
         - status
-
+    PromptInput:
+      type: object
+      required:
+        - idea
+      properties:
+        idea:
+          type: string
+          minLength: 1
+          description: The user's rough idea or task
+        useCase:
+          type: string
+          description: "Intended use case (e.g. Writing, Coding, Marketing)"
+        tone:
+          type: string
+          description: "Desired tone (e.g. Professional, Casual, Technical)"
+        format:
+          type: string
+          description: "Desired output format (e.g. Paragraph, Bullet points)"
+        model:
+          type: string
+          description: OpenRouter model identifier
+    PromptResult:
+      type: object
+      required:
+        - prompt
+      properties:
+        prompt:
+          type: string
+          description: The generated, polished AI prompt
+    ApiError:
+      type: object
+      required:
+        - error
+      properties:
+        error:
+          type: string
