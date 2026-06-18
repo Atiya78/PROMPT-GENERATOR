@@ -194,10 +194,10 @@ export default function Home() {
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="anthropic/claude-3.5-sonnet">Claude 3.5 Sonnet</SelectItem>
+                          <SelectItem value="openai/gpt-4o-mini">GPT-4o mini</SelectItem>
                           <SelectItem value="openai/gpt-4o">GPT-4o</SelectItem>
-                          <SelectItem value="meta-llama/llama-3.1-8b-instruct">Llama 3.1</SelectItem>
-                          <SelectItem value="google/gemini-2.0-flash-001">Gemini 2.0 Flash</SelectItem>
+                          <SelectItem value="google/gemini-2.5-flash">Gemini 2.5 Flash</SelectItem>
+                          <SelectItem value="google/gemini-2.5-pro">Gemini 2.5 Pro</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />

@@ -1,0 +1,1 @@
+- [OpenRouter provider routing](openrouter-replit-provider-routing.md) — user-supplied OPENROUTER_API_KEY may only allow openai/google providers; always probe models before wiring up selectors.
