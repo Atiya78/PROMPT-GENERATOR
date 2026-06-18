@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, forwardRef, type ComponentProps } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -47,6 +47,70 @@ function stripMarkdown(text: string): string {
     .replace(/\*\*(.+?)\*\*/gs, "$1")
     .replace(/\*\*/g, "");
 }
+
+const PLACEHOLDER_EXAMPLES = [
+  "Write a blog post about the benefits of functional programming…",
+  "Summarize this earnings report into 5 key takeaways…",
+  "Draft a friendly cold email to a potential client…",
+  "Create a Python script that cleans messy CSV data…",
+  "Brainstorm 10 catchy names for a productivity app…",
+  "Explain quantum computing to a curious 10-year-old…",
+  "Turn these notes into a polished product launch tweet…",
+  "Generate SQL to find the top 5 customers by revenue…",
+];
+
+function useTypewriterPlaceholder(phrases: string[], enabled: boolean): string {
+  const [reduced] = useState(
+    () =>
+      typeof window !== "undefined" &&
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+  const [index, setIndex] = useState(0);
+  const [subIndex, setSubIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+  const [blink, setBlink] = useState(true);
+
+  const active = enabled && !reduced;
+
+  useEffect(() => {
+    if (!active) return;
+    const current = phrases[index];
+    if (!deleting && subIndex === current.length) {
+      const pause = setTimeout(() => setDeleting(true), 1800);
+      return () => clearTimeout(pause);
+    }
+    if (deleting && subIndex === 0) {
+      setDeleting(false);
+      setIndex((prev) => (prev + 1) % phrases.length);
+      return;
+    }
+    const tick = setTimeout(
+      () => setSubIndex((prev) => prev + (deleting ? -1 : 1)),
+      deleting ? 25 : 55,
+    );
+    return () => clearTimeout(tick);
+  }, [subIndex, index, deleting, active, phrases]);
+
+  useEffect(() => {
+    if (!active) return;
+    const cursor = setInterval(() => setBlink((prev) => !prev), 500);
+    return () => clearInterval(cursor);
+  }, [active]);
+
+  if (!enabled) return "";
+  if (reduced) return phrases[0];
+  return `${phrases[index].slice(0, subIndex)}${blink ? "▌" : "\u00A0"}`;
+}
+
+const IdeaTextarea = forwardRef<
+  HTMLTextAreaElement,
+  ComponentProps<typeof Textarea>
+>(({ value, ...props }, ref) => {
+  const placeholder = useTypewriterPlaceholder(PLACEHOLDER_EXAMPLES, !value);
+  return <Textarea ref={ref} value={value} placeholder={placeholder} {...props} />;
+});
+IdeaTextarea.displayName = "IdeaTextarea";
 
 export default function Home() {
   const [isCopied, setIsCopied] = useState(false);
@@ -109,8 +173,7 @@ export default function Home() {
                   <FormItem>
                     <FormLabel className="text-base font-semibold">Your idea or task</FormLabel>
                     <FormControl>
-                      <Textarea
-                        placeholder="E.g., Write a blog post about the benefits of functional programming..."
+                      <IdeaTextarea
                         className="min-h-[140px] resize-none text-base p-4 bg-card shadow-sm border-border focus-visible:ring-primary focus-visible:border-primary"
                         data-testid="textarea-idea"
                         {...field}
