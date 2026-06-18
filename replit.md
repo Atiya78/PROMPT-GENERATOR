@@ -56,7 +56,8 @@ _Populate as you build — explicit user instructions worth remembering across s
 ## Gotchas
 
 - `OPENROUTER_API_KEY` must be set as a Replit Secret before the backend can call OpenRouter
-- The default model is `anthropic/claude-3.5-sonnet` if none is selected
+- The default model is `anthropic/claude-sonnet-4.6` if none is selected
+- The OpenRouter key is allowlisted to specific providers (`openai`, `anthropic`, `google-ai-studio`). A model only works if one of its serving providers is in that allowlist — e.g. `anthropic/claude-3.5-haiku` (bedrock-only), Llama, DeepSeek, Mistral, and Grok all 404. The model dropdown only lists models verified to actually generate. Probe new models with a real request before adding them.
 
 ## Pointers
 

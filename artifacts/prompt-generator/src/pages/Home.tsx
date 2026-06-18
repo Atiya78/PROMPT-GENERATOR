@@ -264,7 +264,6 @@ export default function Home() {
                             <SelectContent>
                               <SelectItem value="anthropic/claude-sonnet-4.6">Claude Sonnet 4.6</SelectItem>
                               <SelectItem value="anthropic/claude-opus-4.1">Claude Opus 4.1</SelectItem>
-                              <SelectItem value="anthropic/claude-3.5-haiku">Claude 3.5 Haiku</SelectItem>
                               <SelectItem value="openai/gpt-4.1">GPT-4.1</SelectItem>
                               <SelectItem value="openai/gpt-4.1-mini">GPT-4.1 mini</SelectItem>
                               <SelectItem value="openai/gpt-4o">GPT-4o</SelectItem>
@@ -273,11 +272,6 @@ export default function Home() {
                               <SelectItem value="openai/o4-mini">OpenAI o4-mini</SelectItem>
                               <SelectItem value="google/gemini-2.5-pro">Gemini 2.5 Pro</SelectItem>
                               <SelectItem value="google/gemini-2.5-flash">Gemini 2.5 Flash</SelectItem>
-                              <SelectItem value="meta-llama/llama-3.3-70b-instruct">Llama 3.3 70B</SelectItem>
-                              <SelectItem value="meta-llama/llama-4-maverick">Llama 4 Maverick</SelectItem>
-                              <SelectItem value="deepseek/deepseek-chat">DeepSeek V3</SelectItem>
-                              <SelectItem value="mistralai/mistral-large">Mistral Large</SelectItem>
-                              <SelectItem value="x-ai/grok-4.3">Grok 4.3</SelectItem>
                             </SelectContent>
                           </Select>
                           <FormMessage />
@@ -359,7 +353,7 @@ export default function Home() {
                 </Alert>
               ) : data?.prompt ? (
                 <div 
-                  className="font-mono text-sm leading-relaxed whitespace-pre-wrap text-card-foreground selection:bg-primary/20"
+                  className="font-mono text-sm leading-relaxed whitespace-pre-wrap break-words text-card-foreground selection:bg-primary/20"
                   data-testid="text-prompt-result"
                 >
                   {data.prompt}
