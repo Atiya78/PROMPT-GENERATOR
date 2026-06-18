@@ -12,8 +12,8 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border bg-card/80 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 md:px-8">
-        <nav className="flex items-center gap-4 sm:gap-8">
+      <div className="relative mx-auto flex h-16 max-w-6xl items-center justify-end gap-2 px-4 md:px-8">
+        <nav className="flex flex-1 items-center justify-center gap-4 sm:absolute sm:left-1/2 sm:flex-none sm:-translate-x-1/2 sm:gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.href}
@@ -31,7 +31,7 @@ export default function Navbar() {
 
         <Button
           asChild
-          className="rounded-full px-4 font-semibold shadow-sm sm:px-5"
+          className="shrink-0 rounded-full px-4 font-semibold shadow-sm sm:px-5"
           data-testid="button-nav-cta"
         >
           <Link href="/">Try it free</Link>
